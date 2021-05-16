@@ -1,0 +1,20 @@
+#!/bin/bash
+
+NAME=$1;
+FILENAME="${NAME}.certs.conf"
+FILENAME_HOST_CRT="${NAME}.test.crt"
+FILENAME_HOST_KEY="${NAME}.test.key"
+
+echo $NAME;
+echo $FILENAME;
+echo $FILENAME_HOST_CRT;
+echo $FILENAME_HOST_KEY;
+echo "/configs/$FILENAME"
+
+if [ ! -f ./configs/$FILENAME ];
+then
+    echo "File not found!"
+else
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./ssl/$FILENAME_HOST_KEY -out ./ssl/$FILENAME_HOST_CRT -config ./configs/$FILENAME
+    echo "Done!"
+fi
