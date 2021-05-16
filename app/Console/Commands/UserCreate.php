@@ -8,7 +8,7 @@
 namespace App\Console\Commands;
 
 
-use App\Entities\User;
+use App\Models\User;
 use App\Contracts\UserRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
@@ -67,7 +67,7 @@ class UserCreate extends Command
         ]);
 
         /**
-         * @var User $user
+         * @var \App\Models\User $user
          */
 
         $user->syncRoles(['admin']);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Entities\User;
+use App\Models\User;
 use Closure;
 
 /**
@@ -13,7 +13,7 @@ class CheckIfAdmin
 {
 
     /**
-     * @param User $user
+     * @param \App\Models\User $user
      * @return bool
      */
     private function checkIfUserIsAdmin(User $user): bool
