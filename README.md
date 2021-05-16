@@ -1,9 +1,9 @@
 # SeniorCare
 
-###Requirements:
+### Requirements:
 - Docker or Docker Desktop
 
-###Installation guide:
+### Installation guide:
 - Oh fuck this ... just run ./start.sh
 - Visit https://seniorcare.test
 
