@@ -9,7 +9,6 @@ then
     cp ./.env.dev ./.env
 fi
 
-
 docker-compose build && docker-compose up -d
 
 if [ -f ./composer.json ];
