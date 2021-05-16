@@ -13,7 +13,7 @@ fi
 
 if [ -f ./composer.json ];
 then
-    docker exec -i seniorcare_php bash -c "composer install"
+    docker exec -i seniorcare_php bash -c "composer install && php artisan migrate && php artisan db:seed"
 fi
 
 if [ $? -ne 0 ]
