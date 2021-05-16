@@ -14,6 +14,7 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "moneyphp/money": "^3.3",
         "prettus/l5-repository": "^2.7"
     },
     "require-dev": {

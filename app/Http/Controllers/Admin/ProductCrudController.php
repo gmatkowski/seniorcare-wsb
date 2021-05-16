@@ -24,7 +24,7 @@ class ProductCrudController extends CrudController
      *
      * @return void
      */
-    public function setup()
+    public function setup(): void
     {
         CRUD::setModel(\App\Models\Product::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
@@ -32,12 +32,9 @@ class ProductCrudController extends CrudController
     }
 
     /**
-     * Define what happens when the List operation is loaded.
      *
-     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
-     * @return void
      */
-    protected function setupListOperation()
+    protected function setupListOperation(): void
     {
         $this->crud->addColumns([
             [
@@ -47,46 +44,46 @@ class ProductCrudController extends CrudController
             ],
             [
                 'name' => 'price',
-                'label' => "Cena",
-                'type' => 'model_function',
-                'function_name' => 'getRealPrice'
-
+                'label' => 'Cena',
+                'suffix' => ' pln'
             ]
         ]);
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
-         */
     }
 
     /**
-     * Define what happens when the Create operation is loaded.
      *
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
      */
-    protected function setupCreateOperation()
+    protected function setupCreateOperation(): void
     {
         CRUD::setValidation(ProductRequest::class);
-
-        CRUD::setFromDb(); // fields
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         */
+        $this->crud->addFields([
+            [
+                'name' => 'name',
+                'label' => 'Nazwa',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Opis',
+                'type' => 'tinymce'
+            ],
+            [
+                'name' => 'price',
+                'label' => 'Cena',
+                'type' => 'number',
+                'attributes' => [
+                    'step' => 0.01,
+                    'min:' => 0
+                ],
+                'suffix' => ' pln'
+            ]
+        ]);
     }
 
     /**
-     * Define what happens when the Update operation is loaded.
      *
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
      */
-    protected function setupUpdateOperation()
+    protected function setupUpdateOperation(): void
     {
         $this->setupCreateOperation();
     }
