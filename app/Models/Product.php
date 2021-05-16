@@ -15,4 +15,8 @@ class Product extends Model
         'price'
     ];
 
+    public function getRealPrice(): float {
+        return number_format(($this->price / 100), 2);
+    }
+
 }
