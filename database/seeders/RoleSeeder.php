@@ -22,14 +22,11 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['admin', 'user'];
-
-        if (Role::count() > 0) {
-            return;
-        }
-
+        $roles = ['admin', 'user', 'supporter'];
         foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+            if (Role::where('name', $role)->count() === 0) {
+                Role::create(['name' => $role]);
+            }
         }
     }
 }
