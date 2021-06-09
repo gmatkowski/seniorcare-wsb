@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Dto\UserRegisterDto;
 use Illuminate\Http\Request;
 use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Services\UserService;
+use RegisterRequest;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -37,19 +40,30 @@ class AuthController extends Controller
         return view('auth.registration');
     }
 
-    public function customRegistration(Request $request)
+    public function customRegistration(RegisterRequest $request, UserService $service)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
+        $role = Role::where('name', $request->input('role'))->first();
+        $dto = new UserRegisterDto(
+            $request->input('name'),
+            $request->input('email'),
+            $request->input('password'),
+            $role
+        );
 
-        $data = $request->all();
-        $check = $this->create($data);
+        if ($role->name === 'user')
+        {
+            $dto->setCity($request->input('city'));
+            $dto->setAddress($request->input('address'));
+            $dto->setPostcode($request->input('postcode'));
+        }
+
+        $user = $service->create($dto);
+
+        Auth::login($user);
 
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
+
 
     public function dashboard()
     {

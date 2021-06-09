@@ -2,13 +2,23 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
-use Hash;
-use Session;
+use App\Contracts\UserRepository;
+use App\Dto\UserRegisterDto;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
-    //
+    private UserRepository $repository;
+
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function create(UserRegisterDto $dto): User {
+        $user = $this->repository->create($dto->toArray());
+        $user->syncRoles($dto->getRole());
+
+        return $user;
+    }
 }
