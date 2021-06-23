@@ -8,14 +8,13 @@
 - add seniorcare.test to your hosts
 - Visit https://seniorcare.test
 - Connect into the container (Container guideline below)
-- run command: php artisan user:create
-- fill questionnaire
+- run command: php artisan user:create && fill questionnaire
 - Sing in https://seniorcare.test/admin
 
 If SSL certificats not working simple add them to you certificats DB (./docker/nginx/ssl/seniorcare.test.crt)
 
 ### Mailhog (email local service):
-- http://localhost:8026/
+- http://localhost:8025/
 
 ### Container
 - Windows: winpty docker-compose exec seniorcare_php bash
