@@ -20,19 +20,16 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return User::class;
     }
 
-
-
     /**
-     * Boot up the repository, pushing criteria
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
-    public function boot()
+    public function boot(): void
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 }

@@ -28,7 +28,7 @@ class ProductCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Product::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
-        CRUD::setEntityNameStrings('product', 'products');
+        CRUD::setEntityNameStrings('produkt', 'produkty');
     }
 
     /**
@@ -46,6 +46,10 @@ class ProductCrudController extends CrudController
                 'name' => 'price',
                 'label' => 'Cena',
                 'suffix' => ' pln'
+            ],
+            [
+                'name' => 'symbol',
+                'label' => 'Symbol'
             ]
         ]);
     }
@@ -65,7 +69,10 @@ class ProductCrudController extends CrudController
             [
                 'name' => 'description',
                 'label' => 'Opis',
-                'type' => 'tinymce'
+                'type' => 'tinymce',
+                'options' => [
+                    'height' => 400
+                ]
             ],
             [
                 'name' => 'price',
@@ -76,6 +83,20 @@ class ProductCrudController extends CrudController
                     'min:' => 0
                 ],
                 'suffix' => ' pln'
+            ],
+            [
+                'name' => 'symbol',
+                'label' => 'Symbol',
+                'type' => 'text',
+                'default' => 'szt.'
+            ],
+            [
+                'label' => 'Obrazek',
+                'name' => 'image',
+                'type' => 'image',
+                'crop' => true,
+                'disk' => 'public',
+                'aspect_ratio' => 1,
             ]
         ]);
     }

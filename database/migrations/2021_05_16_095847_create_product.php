@@ -11,12 +11,14 @@ class CreateProduct extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description');
+            $table->string('symbol')->default('szt.');
+            $table->string('image')->nullable();
             $table->integer('price')->unsigned();
             $table->timestamps();
         });
@@ -27,7 +29,7 @@ class CreateProduct extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }

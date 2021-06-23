@@ -13,8 +13,11 @@ docker-compose build && docker-compose up -d
 
 if [ -f ./composer.json ];
 then
-    docker exec -i seniorcare_php bash -c "composer install && php artisan migrate && php artisan db:seed"
+    docker exec -i seniorcare_php bash -c "composer install && php artisan migrate --seed"
 fi
+
+cp git-hooks/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
 
 if [ $? -ne 0 ]
 then

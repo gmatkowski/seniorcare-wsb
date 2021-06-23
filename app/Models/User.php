@@ -5,13 +5,22 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * @package App\Models
+ */
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, HasRoles, CrudTrait;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
+    use CrudTrait;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +31,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'first_name',
+        'last_name',
+        'address',
+        'city',
+        'postcode',
+        'phone'
     ];
 
     /**
@@ -32,6 +47,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'postcode'
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $appends = [
+        'name'
     ];
 
     /**
@@ -42,4 +69,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return string
+     */
+    public function getNameAttribute(): string
+    {
+        return sprintf('%s %s', $this->first_name, $this->last_name);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User: gmatk
  * Date: 16.05.2021
@@ -7,35 +8,52 @@
 
 namespace App\Console\Commands;
 
-
+use App\Contracts\UserServiceContract;
+use App\Dto\UserRegisterDto;
 use App\Models\User;
-use App\Contracts\UserRepository;
+use App\Services\RoleService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+/**
+ * Class UserCreate
+ * @package App\Console\Commands
+ */
 class UserCreate extends Command
 {
+    /**
+     * @var string
+     */
     protected $signature = 'user:create';
+    /**
+     * @var string
+     */
     protected $description = 'Create admin user';
 
-    public function handle(UserRepository $repository): void
+
+    public function handle(UserServiceContract $service): void
     {
-        $name = $this->ask('Name?');
+        $first_name = $this->ask('Imię?');
+        $last_name = $this->ask('Nazwisko?');
         $email = $this->ask('Email?');
         $password = $this->ask('Password?');
         $password_confirmation = $this->ask('Confirm password?');
 
         $validator = Validator::make([
-            'name' => $name,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
             'email' => $email,
             'password' => $password,
             'password_confirmation' => $password_confirmation,
         ], [
-            'name' => [
+            'first_name' => [
                 'required',
-                'min:3',
-                Rule::unique(User::class)
+                'min:3'
+            ],
+            'last_name' => [
+                'required',
+                'min:3'
             ],
             'email' => [
                 'required',
@@ -45,11 +63,11 @@ class UserCreate extends Command
             'password' => [
                 'required',
                 'confirmed',
-                'min:8'
+                'min:' . config('auth.password_min_length')
             ],
             'password_confirmation' => [
                 'required',
-                'min:8'
+                'min:' . config('auth.password_min_length')
             ]
         ]);
 
@@ -60,17 +78,15 @@ class UserCreate extends Command
             return;
         }
 
-        $user = $repository->create([
-            'name' => $name,
-            'email' => $email,
-            'password' => bcrypt($password)
-        ]);
+        $dto = new UserRegisterDto(
+            $first_name,
+            $last_name,
+            $email,
+            $password,
+            RoleService::ADMIN
+        );
 
-        /**
-         * @var \App\Models\User $user
-         */
-
-        $user->syncRoles(['admin']);
+        $user = $service->register($dto);
 
         $this->info(sprintf('User %s (%s) created', $user->name, $user->email));
     }

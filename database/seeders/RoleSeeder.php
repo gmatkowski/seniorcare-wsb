@@ -7,6 +7,7 @@
 
 namespace Database\Seeders;
 
+use App\Services\RoleService;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -21,8 +22,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['admin', 'user', 'supporter'];
-        foreach ($roles as $role) {
+        foreach (RoleService::$roles as $role) {
             if (Role::where('name', $role)->count() === 0) {
                 Role::create(['name' => $role]);
             }

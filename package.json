@@ -10,9 +10,28 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
+        "axios": "^0.21.1",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "deepmerge": "^4.2.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "sass": "^1.32.13",
+        "sass-loader": "^12.1.0",
+        "vue-loader": "^15.9.5",
+        "vue-template-compiler": "^2.6.14",
+        "webpack-livereload-plugin": "^1.2.0"
+    },
+    "dependencies": {
+        "@jzolago/vuetify-number-input": "^0.4.0",
+        "moment": "^2.29.1",
+        "vee-validate": "^3.4.10",
+        "vue": "^2.6.14",
+        "vue-axios": "^3.2.4",
+        "vue-router": "^3.5.1",
+        "vuetify": "^2.5.3",
+        "vuetify-mask": "^1.1.2",
+        "vuex": "^3.6.2"
     }
 }

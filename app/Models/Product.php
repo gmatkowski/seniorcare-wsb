@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\ModelImageTrait;
+use App\Traits\PriceTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Jamesh\Uuid\HasUuid;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\DecimalMoneyFormatter;
@@ -16,6 +20,9 @@ use Money\Money;
 class Product extends Model
 {
     use CrudTrait;
+    use HasUuid;
+    use ModelImageTrait;
+    use PriceTrait;
 
     /**
      * @var string[]
@@ -23,27 +30,23 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'price'
+        'price',
+        'symbol',
+        'image'
     ];
 
     /**
-     * @return string
+     * @var string[]
      */
-    public function getPriceAttribute(): string
-    {
-        $money = new Money($this->attributes['price'], new Currency('PLN'));
-        $currencies = new ISOCurrencies();
-        $moneyFormatter = new DecimalMoneyFormatter($currencies);
-
-        return $moneyFormatter->format($money);
-    }
+    protected $appends = [
+        'image_url'
+    ];
 
     /**
-     * @param float $price
+     * @return BelongsToMany
      */
-    public function setPriceAttribute(float $price): void
+    public function orders(): BelongsToMany
     {
-        $this->attributes['price'] = $price * 100;
+        return $this->belongsToMany(Order::class);
     }
-
 }

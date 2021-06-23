@@ -1,0 +1,6 @@
+export const AWAITING = 'awaiting'
+export const ASSIGNED = 'assigned'
+export const IN_PROGRESS = 'in-progress'
+export const DONE = 'done'
+export const CONFIRMED = 'confirmed'
+export const CANCELED = 'canceled'

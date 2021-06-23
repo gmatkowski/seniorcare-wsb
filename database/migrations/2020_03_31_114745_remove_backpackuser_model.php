@@ -11,7 +11,7 @@ class RemoveBackpackuserModel extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up():void
     {
         // establish the table names
         $model_has_roles = config('permission.table_names.model_has_roles');
@@ -26,7 +26,7 @@ class RemoveBackpackuserModel extends Migration
         }
     }
 
-    public function replaceModels($table_name)
+    public function replaceModels($table_name):void
     {
         Log::info('Replacing BackpackUser model in '.$table_name);
 
