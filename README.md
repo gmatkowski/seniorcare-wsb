@@ -7,6 +7,8 @@
 - Run ./start.sh (git bash or any other console CLI)
 - add seniorcare.test to your hosts
 - Visit https://seniorcare.test
+
+#### Create user with Admin role
 - Connect into the container (Container guideline below)
 - run command: php artisan user:create && fill questionnaire
 
