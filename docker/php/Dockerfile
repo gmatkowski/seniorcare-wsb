@@ -19,7 +19,7 @@ RUN apt-get install -y libzip-dev zip && docker-php-ext-configure zip && docker-
 RUN apt-get install -y git
 
 # NANO
-RUN apt-get install -y nano 
+RUN apt-get install -y nano
 
 # Curl
 RUN apt-get install -y libcurl3-dev curl && docker-php-ext-install curl
@@ -66,7 +66,7 @@ RUN export PATH=~/.composer/vendor/bin:$PATH
 # GMP
 RUN apt-get install -y libgmp-dev re2c libmhash-dev libmcrypt-dev file
 RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/local/include/
-RUN docker-php-ext-configure gmp 
+RUN docker-php-ext-configure gmp
 RUN docker-php-ext-install gmp
 
 # Custom php.ini config
@@ -78,6 +78,9 @@ COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 RUN apt-get clean
 RUN apt-get -y autoremove
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Rights
+RUN chown -R www-data:www-data /var/www
 
 # Set up default directory
 
