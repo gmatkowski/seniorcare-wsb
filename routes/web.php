@@ -27,12 +27,16 @@ $app = static function () {
 Route::group(['prefix' => 'auth'], function (Router $router) {
     $router->group(['middleware' => ['throttle:auth', 'guest']], function (Router $router) {
         $router->post('login', [AuthController::class, 'login'])->name('auth.login');
-        $router->post('register', [AuthController::class, 'email'])->name('auth.register');
+        $router->post('register', [AuthController::class, 'register'])->name('auth.register');
     });
 
     $router->group(['middleware' => ['auth']], function (Router $router) {
         $router->post('logout', [AuthController::class, 'logout'])->name('auth.logout');
     });
+});
+
+Route::group(['middleware' => ['signed', 'guest']], function (Router $router) {
+    $router->post('weryfikacja', [AuthController::class, 'verify'])->name('auth.verify');
 });
 
 Route::group(['prefix' => 'basket', 'middleware' => ['auth']], function (Router $router) {
@@ -62,7 +66,7 @@ Route::group(['prefix' => 'order', 'middleware' => ['auth']], function (Router $
 
     $router->get('/free', [OrderController::class, 'free'])
         ->middleware(['can:free,' . Order::class])
-        ->name('order.my');
+        ->name('order.free');
 
     $router->post('/', [OrderController::class, 'create'])
         ->name('order.create');
@@ -106,9 +110,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function (Router $r
     $router->post('/update', [UserController::class, 'update'])->name('user.update');
 });
 
-Route::group(['middleware' => ['signed', 'guest']], function (Router $router) {
-    $router->post('weryfikacja', [AuthController::class, 'verify'])->name('auth.verify');
-});
 
 Route::get('weryfikacja', $app)->name('verification.verify')->middleware(['signed']);
-Route::get('/{any}', $app)->where('any', '.*');
+Route::get('/{any}', $app)->where('any', '.*')->name('welcome');

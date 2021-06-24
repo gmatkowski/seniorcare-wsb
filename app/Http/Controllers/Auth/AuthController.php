@@ -53,7 +53,7 @@ class AuthController extends Controller
      * @param UserRegisterRequest $request
      * @return UserRegisteredResource
      */
-    public function email(UserRegisterRequest $request): UserRegisteredResource
+    public function register(UserRegisterRequest $request): UserRegisteredResource
     {
         $dto = new UserRegisterDto(
             $request->input('first_name'),
@@ -68,6 +68,8 @@ class AuthController extends Controller
         event(
             new Registered($user)
         );
+
+        $user->load(['roles']);
 
         return new UserRegisteredResource($user);
     }

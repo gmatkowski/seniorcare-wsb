@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Traits\PriceTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,6 +20,7 @@ class Order extends Model
     use CrudTrait;
     use HasUuid;
     use PriceTrait;
+    use HasFactory;
 
     /**
      *
@@ -84,5 +87,13 @@ class Order extends Model
     public function isFree(): bool
     {
         return $this->status === self::AWAITING;
+    }
+
+    /**
+     * @return OrderFactory
+     */
+    protected static function newFactory(): OrderFactory
+    {
+        return OrderFactory::new();
     }
 }

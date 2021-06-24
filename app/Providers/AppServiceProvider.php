@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Faker\Providers\PolishPhoneProvider;
 use App\Contracts\AuthServiceContract;
 use App\Contracts\OrderServiceContract;
 use App\Contracts\UserServiceContract;
 use App\Services\AuthService;
 use App\Services\OrderService;
 use App\Services\UserService;
+use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -16,6 +19,16 @@ use Illuminate\Support\ServiceProvider;
  */
 class AppServiceProvider extends ServiceProvider
 {
+    public function register(): void {
+        if (class_exists(Factory::class)) {
+            $this->app->bind(Generator::class, function () {
+                $faker = \Faker\Factory::create(config('app.faker_locale'));
+                $faker->addProvider(new PolishPhoneProvider($faker));
+                return $faker;
+            });
+        }
+    }
+
     /**
      *
      */

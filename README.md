@@ -9,7 +9,16 @@
 - Visit https://seniorcare.test
 - Connect into the container (Container guideline below)
 - run command: php artisan user:create && fill questionnaire
-- Sing in https://seniorcare.test/admin
+
+#### Administration panel:
+- https://seniorcare.test/admin
+
+#### Web:
+- Sing in https://seniorcare.test
+
+### Testing
+- get into the container
+- run ./vendor/bin/phpunit
 
 If SSL certificats not working simple add them to you certificats DB (./docker/nginx/ssl/seniorcare.test.crt)
 

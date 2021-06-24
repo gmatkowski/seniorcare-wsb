@@ -50,6 +50,10 @@ class OrderPolicy
      */
     public function create(User $user, Cart $cart): bool
     {
+        if (!$user->hasRole(RoleService::SENIOR)) {
+            return false;
+        }
+
         return $cart->session($user->getKey())->getContent()->count() > 0;
     }
 
