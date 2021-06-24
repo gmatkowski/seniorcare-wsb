@@ -14,7 +14,7 @@
 - https://seniorcare.test/admin
 
 #### Web:
-- Sing in https://seniorcare.test
+- https://seniorcare.test
 
 ### Testing
 - get into the container
