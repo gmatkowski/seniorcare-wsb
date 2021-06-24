@@ -20,7 +20,7 @@
 - get into the container
 - run ./vendor/bin/phpunit
 
-If SSL certificats not working simple add them to you certificats DB (./docker/nginx/ssl/seniorcare.test.crt)
+If SSL certificats not working simple add them to you certificates DB (./docker/nginx/ssl/seniorcare.test.crt)
 
 ### Mailhog (email local service):
 - http://localhost:8025/

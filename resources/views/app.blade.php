@@ -8,9 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <app />
-    </div>
+    <div id="app"></div>
     <script>
         window.app = {
             csrfToken: '{{ csrf_token() }}',

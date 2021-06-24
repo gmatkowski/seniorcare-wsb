@@ -16,10 +16,9 @@ import '@/js/filters'
 import store from '@/js/store'
 
 new Vue({
+    el: '#app',
     router,
     vuetify,
     store,
-    components: {
-        App
-    }
-}).$mount('#app')
+    render: h => h(App)
+})
