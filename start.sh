@@ -18,7 +18,7 @@ fi
 
 cp git-hooks/pre-commit .git/hooks/pre-commit
 
-composer global require "squizlabs/php_codesniffer=*"
+#composer global require "squizlabs/php_codesniffer=*"
 
 if [ $? -ne 0 ]
 then
