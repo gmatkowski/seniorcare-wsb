@@ -47,7 +47,6 @@ Route::group(['prefix' => 'basket', 'middleware' => ['auth']], function (Router 
         ->name('basket.add')
         ->whereUuid('product');
 
-
     $router->patch('{product}', [BasketController::class, 'update'])
         ->name('basket.update')
         ->whereUuid('product');

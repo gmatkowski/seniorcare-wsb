@@ -26,10 +26,8 @@
                                         ({{ product.symbol }})
                                     </v-card-text>
                                 </v-card>
-
                             </v-col>
                         </v-row>
-
 
                         <v-pagination
                             v-if="pages > 1"
