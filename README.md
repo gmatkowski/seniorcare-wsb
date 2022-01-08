@@ -9,7 +9,7 @@
 - Visit https://seniorcare.test
 
 #### Create user with Admin role
-- Connect into the container (Container guideline below)
+- Get into the container (Container guideline below)
 - run command: php artisan user:create && fill questionnaire
 
 #### Administration panel:

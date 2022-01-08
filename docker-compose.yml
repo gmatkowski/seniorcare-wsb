@@ -19,7 +19,6 @@ services:
 
   seniorcare_nginx:
     container_name: seniorcare_nginx
-    restart: always
     build:
       context: ./docker/nginx
       dockerfile: Dockerfile
@@ -68,7 +67,6 @@ services:
 
   seniorcare_mailhog:
     container_name: seniorcare_mailhog
-    restart: always
     build:
       context: ./docker/mailhog
       dockerfile: Dockerfile
@@ -77,10 +75,26 @@ services:
     networks:
       - seniorcare
 
+  # PgAdmin container
+  pgadmin:
+    container_name: seniorcare_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - seniorcare_pgadmin_volume:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - seniorcare
+
 volumes:
   seniorcare_database_volume:
     driver: local
   seniorcare_keydb_volume:
+    driver: local
+  seniorcare_pgadmin_volume:
     driver: local
 
 networks:
