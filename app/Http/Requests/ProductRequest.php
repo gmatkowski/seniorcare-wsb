@@ -5,6 +5,9 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ *
+ */
 class ProductRequest extends FormRequest
 {
     /**
@@ -12,9 +15,8 @@ class ProductRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        // only allow updates if the user is logged in
         return backpack_auth()->check();
     }
 
@@ -23,34 +25,36 @@ class ProductRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => [
+                'required',
+                'min:3'
+            ],
+            'price' => [
+                'required'
+            ],
+            'description' => [
+                'required',
+                'min:3'
+            ],
+            'symbol' => [
+                'required'
+            ]
         ];
     }
 
     /**
-     * Get the validation attributes that apply to the request.
-     *
      * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
-            //
-        ];
-    }
-
-    /**
-     * Get the validation messages that apply to the request.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            //
+            'name' => __('nazwa'),
+            'price' => __('cena'),
+            'description' => __('opis'),
+            'symbol' => __('symbol')
         ];
     }
 }

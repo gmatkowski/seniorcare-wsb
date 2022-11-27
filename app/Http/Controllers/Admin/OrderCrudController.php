@@ -99,6 +99,10 @@ class OrderCrudController extends CrudController
 
         $this->crud->addClause('withCount', ['products']);
         $this->crud->addClause('with', ['user', 'supporter']);
+
+        if (!request()->has('order')) {
+            $this->crud->orderBy('created_at', 'DESC');
+        }
     }
 
     /**

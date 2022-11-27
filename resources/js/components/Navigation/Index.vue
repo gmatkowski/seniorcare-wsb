@@ -15,7 +15,7 @@
             <div class="align-center d-none d-sm-flex">
                 <template v-if="isLogged">
 
-                    <v-btn small v-if="isSenior" :to="{ name: 'product.list'}" color="purple" dark class="mr-2">
+                    <v-btn small v-if="isSenior" :to="{ name: 'product.list' }" color="purple" dark class="mr-2">
                         <v-icon class="mr-2" dark>mdi-heart</v-icon>
                         Produkty
                     </v-btn>

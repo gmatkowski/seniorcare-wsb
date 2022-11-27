@@ -46,7 +46,7 @@ services:
       - "${DOCKER_DB_PORT:-5432}:5432"
     environment:
       - POSTGRES_MULTIPLE_DATABASES="testing"
-      - POSTGRES_DB=app
+      - POSTGRES_DB=${DB_DATABASE:-app}
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=app
       - LC_ALL=C.UTF-8

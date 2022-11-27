@@ -8,7 +8,8 @@
             :server-items-length="total"
             :loading="isLoading"
             item-key="id"
-            class="elevation-1"show-expand
+            class="elevation-1"
+            show-expand
         >
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">

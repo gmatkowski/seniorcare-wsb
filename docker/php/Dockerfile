@@ -1,5 +1,5 @@
 # Image
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 # Starting from scratch
 RUN apt-get clean

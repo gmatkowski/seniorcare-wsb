@@ -52,6 +52,10 @@ class ProductCrudController extends CrudController
                 'label' => 'Symbol'
             ]
         ]);
+
+        if (!request()->has('order')) {
+            $this->crud->orderBy('name', 'ASC');
+        }
     }
 
     /**
