@@ -18,8 +18,6 @@ fi
 
 cp git-hooks/pre-commit .git/hooks/pre-commit
 
-docker exec -i seniorcare_php bash -c "php artisan user:create"
-
 if [ $? -ne 0 ]
 then
     printf "${RED}Dockerized ! Something wrong happen, check output! :-("
