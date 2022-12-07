@@ -43,7 +43,7 @@ services:
     volumes:
       - seniorcare_database_volume:/var/lib/postgresql/data
     ports:
-      - "${DOCKER_DB_PORT:-5432}:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_MULTIPLE_DATABASES=testing,${DB_DATABASE:-base}
       - POSTGRES_USER=app
@@ -60,7 +60,7 @@ services:
     volumes:
       - seniorcare_keydb_volume:/data
     ports:
-      - "${DOCKER_REDIS_PORT:-6379}:6379"
+      - "6379:6379"
     networks:
       - seniorcare
 
@@ -70,7 +70,8 @@ services:
       context: ./docker/mailhog
       dockerfile: Dockerfile
     ports:
-      - "${DOCKER_MAILHOG_PORT:-8025}:8025"
+      - "8025:8025"
+      - "1025:1025"
     networks:
       - seniorcare
 
@@ -84,7 +85,7 @@ services:
     volumes:
       - seniorcare_pgadmin_volume:/root/.pgadmin
     ports:
-      - "${PGADMIN_PORT:-5050}:80"
+      - "5050:80"
     networks:
       - seniorcare
 

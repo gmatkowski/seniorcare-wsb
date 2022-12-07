@@ -16,6 +16,8 @@ then
     docker exec -i seniorcare_php bash -c "composer install && php artisan migrate --seed"
 fi
 
+docker exec -i seniorcare_php bash -c "php artisan storage:link"
+
 cp git-hooks/pre-commit .git/hooks/pre-commit
 
 if [ $? -ne 0 ]
