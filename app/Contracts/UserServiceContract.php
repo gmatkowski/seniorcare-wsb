@@ -19,6 +19,11 @@ use App\Models\User;
 interface UserServiceContract
 {
     /**
+     * @return UserRepository
+     */
+    public function getRepository(): UserRepository;
+
+    /**
      * @param User $user
      * @param UserUpdateDto $dto
      */

@@ -37,6 +37,14 @@ class UserService implements UserServiceContract
     }
 
     /**
+     * @return UserRepository
+     */
+    public function getRepository(): UserRepository
+    {
+        return $this->repository;
+    }
+
+    /**
      * @param UserRegisterDto $dto
      * @return User
      */

@@ -14,6 +14,13 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * Class User
  * @package App\Models
+ * @property string email
+ * @property string first_name
+ * @property string last_name
+ * @property string address
+ * @property string city
+ * @property string postcode
+ * @property string phone
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -29,7 +36,6 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'first_name',
